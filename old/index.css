@@ -1,0 +1,37 @@
+#graphic_container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    background-color: aqua;
+    margin: 50px auto;
+}
+
+#budget_graphic {
+    background-color: green;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+#expense_graphic {
+    background-color: yellow;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+#saving_graphic {
+    background-color: red;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+#saving_graphic p {
+    line-height: 1.5;
+    display: inline-block;
+    vertical-align: middle;
+}
