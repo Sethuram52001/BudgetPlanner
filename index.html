@@ -7,6 +7,43 @@
     <title>Budget Planner</title>
     <link rel="stylesheet" href="./styles/index.css">
     <script src="./js/index.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(drawExpenseChart);
+      function drawChart() {
+        let data = google.visualization.arrayToDataTable([
+            ['Category', 'Budget'],
+            ['Budget', 5500],
+            ['Expense', 3000],
+            ['Savings', 2500],
+        ]);
+
+        let options = {
+            title: 'Budget Summary',
+            pieHole: 0.4
+        };
+        let chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+
+      function drawExpenseChart() {
+        let data = google.visualization.arrayToDataTable([
+            ['Category', 'Expense'],
+            ['Travel', 1000],
+            ['Entertainment', 1000],
+            ['Food', 2000],
+        ]);
+
+        let options = {
+            title: 'Expense Summary',
+            pieHole: 0.4
+        };
+        let chart = new google.visualization.PieChart(document.getElementById('expensechart'));
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 <body>
     <nav>
@@ -17,6 +54,15 @@
             <li class="pages"><a href="./pages/login.html">Login</a></li>
         </ul>
     </nav>
+
+    <div>
+        <p>Welcome back {user}! Here's your current status of budget plan</p>
+    </div>
+
+    <div id="graphic_summary">
+        <div id="donutchart" style="width: 500px; height: 500px;"></div>
+        <div id="expensechart" style="width: 500px; height: 500px;"></div>
+    </div>
 
     <div id="graphic_container">
         <div id="budget_graphic">

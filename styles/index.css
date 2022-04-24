@@ -43,3 +43,7 @@ nav ul li a.logo {
 nav ul li a:hover {
     background-color: #1e99e0;
 }
+
+#graphic_summary {
+    display: flex;
+}
