@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Planner</title>
     <link rel="stylesheet" href="../styles/login.css">
+    <script src="../js/login.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function() {
+            $('.message a').on('click', function() {
+                $('form').animate({
+                    height: "toggle",
+                    opacity: "toggle"
+                }, "fast");
+            });
+        });
+    </script>
 </head>
 <body>
     <nav>
@@ -18,31 +30,20 @@
     </nav>
 
     <div>
-        <ul>
-            <li>Sign up</li>
-            <li>Login</li>
-        </ul>
-        <div>
-            <div id="signup">
-                <form action="/" method="post">
-                    <label>Name</label>
-                    <input type="text" name="name" placeholder="Name" required>
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="name@email.com" required>
-                    <label>Password</label>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <input type="submit" value="Sign Up">
-                </form>
-            </div>
-            <div id="login">
-                <form action="/" method="post">
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="name@gmail.com" required>
-                    <label>Password</label>
-                    <input type="password" name="password" placeholder="Password" required>
-                    <input type="submit" value="Login">
-                </form>
-            </div>
+        <div class="form">
+            <form class="signup">
+                <input id="register-name" type="text" placeholder="Name">
+                <input id="register-mail" type="email" placeholder="name@email.com">
+                <input id="register-password" type="password" placeholder="Password">
+                <button name="register-button" type="button" id="register-button">Register</button>
+                <p class="message">Already registered?<a href="#">Sign In</a></p>
+            </form>
+            <form class="login">
+                <input id="login-mail" type="text" placeholder="name@email.com">
+                <input id="login-password" type="text" placeholder="Password">
+                <button name="login-button" type="button" id="login-button">Login</button>
+                <p class="message">Not registered? <a href="#">Create an account</a></p>
+            </form>
         </div>
     </div>
 </body>
