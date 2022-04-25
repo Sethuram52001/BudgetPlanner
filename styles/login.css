@@ -45,8 +45,6 @@ nav ul li a:hover {
 }
 
 .form {
-    animation-name: launch;
-    animation-duration: 4s;
     position: relative;
     z-index: 1;
     background-color: white;
@@ -95,4 +93,8 @@ nav ul li a:hover {
 
 .form .signup {
     display: visible;
+}
+
+.container {
+    margin: 2em;
 }

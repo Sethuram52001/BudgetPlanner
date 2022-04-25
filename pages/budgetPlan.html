@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Planner</title>
     <link rel="stylesheet" href="../styles/budgetPlan.css">
+    <link rel="stylesheet" href="../styles/form.css">
 </head>
 <body>
     <nav>
@@ -17,14 +18,20 @@
         </ul>
     </nav>
 
-    <div>
+    <div class="container">
         <form action="/" method="post">
-            <label>Budget</label>
-            <input type="number" name="budget" value="0">
-            <label>Expense</label>
-            <input type="number" name="expense" value="0">
-            <label>Savings</label>
-            <input type="number" name="savings" value="0">
+            <div class="budget">
+                <label>Budget : </label>
+                <input type="number" name="budget" value="0">
+            </div>
+            <div class="expense">
+                <label>Expense : </label>
+                <input type="number" name="expense" value="0">
+            </div>
+            <div class="saving">
+                <label>Savings : </label>
+                <input type="number" name="savings" value="0">
+            </div>
             <input type="submit" value="Set Budget Plan">
         </form>
     </div>

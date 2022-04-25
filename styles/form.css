@@ -1,0 +1,35 @@
+.container{
+    height:90vh;
+    display: flex;
+    justify-content: center;
+    margin: 2em;
+}
+form{
+    height:89.75vh;
+    width:600px;
+    color:#1faae0;
+    font-size: 1.5em;
+    background-color: rgb(41, 40, 40);
+    padding:2em;
+}
+input[type=number]{
+    width: 80%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin:2em;
+    font-size: 0.7em;
+}
+
+input[type=submit] {
+    background-color: #1faae0;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;    
+}
+input[type=submit]:hover{
+    background-color: #fff;
+    color:#1faae0;
+}

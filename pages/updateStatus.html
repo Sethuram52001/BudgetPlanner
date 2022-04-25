@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Budget Planner</title>
     <link rel="stylesheet" href="../styles/updateStatus.css">
+    <link rel="stylesheet" href="../styles/form.css">
 </head>
 <body>
     <nav>
@@ -17,15 +18,21 @@
         </ul>
     </nav>
 
-    <div>
+    <div class="container">
         <form action="/" method="post">
-            <label>Update budget</label>
-            <input type="number" name="updateBudget" value="0">
-            <label>Update expense</label>
-            <input type="number" name="updateExpense" value="0">
-            <label>Update savings</label>
-            <input type="number" name="updateSavings" value="0">
-            <input type="submit" value="Set Budget Plan">
+            <div class="budget">
+                <label>Update Budget : </label>
+                <input type="number" name="updatebudget" value="0">
+            </div>
+            <div class="expense">
+                <label>Update Expense : </label>
+                <input type="number" name="updateexpense" value="0">
+            </div>
+            <div class="saving">
+                <label>Update Savings : </label>
+                <input type="number" name="updatesavings" value="0">
+            </div>
+            <input type="submit" value="Update Budget Plan">
         </form>
     </div>
 </body>
