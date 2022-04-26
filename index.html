@@ -64,19 +64,38 @@
         <div id="expensechart" style="width: 500px; height: 500px;"></div>
     </div>
 
-    <div id="graphic_container">
-        <div id="budget_graphic">
-            <h3>Budget</h3>
-            <span>1000</span>
-        </div>
-        <div id="expense_graphic">
-            <h3>Expense</h3>
-            <span>600</span>
-        </div>
-        <div id="saving_graphic">
-            <h3>Saving</h3>
-            <span>400</span>
-        </div>
+    <div class="container">
+    <div class="graphic_container">
+        <div class="circular">
+            <div class="inner"></div>
+            <div class="number">50%</div>
+            <div class="circle">
+              <div class="bar left">
+                <div class="progress"></div>
+              </div>
+              <div class="bar right">
+                <div class="progress"></div>
+              </div>
+            </div>
+          </div>
+        <p class="value">Expense /<sub>Budget</sub></p>
+    </div>
+
+      <div class="graphic_container">
+        <div class="circular">
+            <div class="inner"></div>
+            <div class="number">30%</div>
+            <div class="circle">
+              <div class="bar left">
+                <div class="progress"></div>
+              </div>
+              <div class="bar right">
+                <div class="progress"></div>
+              </div>
+            </div>
+          </div>
+        <p class="value">Savings /<sub>Budget</sub></p>
+      </div>
     </div>
 </body>
 </html>
