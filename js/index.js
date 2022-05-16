@@ -1,7 +1,8 @@
-google.charts.load("current", { package: ["corechart"] });
+/*google.charts.load("current", { package: ["corechart"] });
 google.charts.setOnLoadCallback(drawChart);
 
 function drawChart() {
+    console.log("called inside index.js")
     let data = google.visualization.arrayToDataTable([
         ['Category', 'Budget'],
         ['Budget', 5500],
@@ -16,7 +17,7 @@ function drawChart() {
 
     let chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
-}
+}*/
 
 function validateUser() {
     const activeUser = sessionStorage.getItem("activeUser");
