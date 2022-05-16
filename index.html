@@ -9,15 +9,37 @@
     <script src="./js/index.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+      let userBudgetPlan = null;
+      let userExpensePlan = null;
+      if(sessionStorage.getItem("activeUser") !== null) {
+        const userPlans = JSON.parse(localStorage.getItem("userBudgetPlans"));
+        const userExpensePlans = JSON.parse(localStorage.getItem("userExpensePlans"));
+        for(let plan of userPlans) {
+          if(plan.email === sessionStorage.getItem("activeUser")) {
+            userBudgetPlan = plan;
+          }
+        }
+
+        for(let plan of userExpensePlans) {
+          if(plan.email === sessionStorage.getItem("activeUser")) {
+            userExpensePlan = plan;
+          }
+        }
+      }
+
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       google.charts.setOnLoadCallback(drawExpenseChart);
       function drawChart() {
+        let budget = userBudgetPlan !== null ? userBudgetPlan.budget : 5500;
+        let expense = userBudgetPlan !== null ? userBudgetPlan.expense : 3000;
+        let savings = userBudgetPlan !== null ? userBudgetPlan.savings : 2500;
+
         let data = google.visualization.arrayToDataTable([
             ['Category', 'Budget'],
-            ['Budget', 5500],
-            ['Expense', 3000],
-            ['Savings', 2500],
+            ['Budget', budget],
+            ['Expense', expense],
+            ['Savings', savings],
         ]);
 
         let options = {
@@ -29,11 +51,14 @@
       }
 
       function drawExpenseChart() {
+        let travel = userExpensePlan !== null ? userExpensePlan.travel : 1000;
+        let entertainment = userExpensePlan !== null ? userExpensePlan.entertainment : 1000;
+        let food = userExpensePlan !== null ? userExpensePlan.food : 2000;
         let data = google.visualization.arrayToDataTable([
             ['Category', 'Expense'],
-            ['Travel', 1000],
-            ['Entertainment', 1000],
-            ['Food', 2000],
+            ['Travel', travel],
+            ['Entertainment', entertainment],
+            ['Food', food],
         ]);
 
         let options = {

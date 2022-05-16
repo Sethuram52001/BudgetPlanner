@@ -1,23 +1,39 @@
-/*google.charts.load("current", { package: ["corechart"] });
-google.charts.setOnLoadCallback(drawChart);
+let userBudgetPlans = [
+    {
+        "email": "abc@gmail.com",
+        "budget": 5500,
+        "expense": 3000,
+        "savings": 2500
+    },
+    {
+        "email": "def@gmail.com",
+        "budget": 6000,
+        "expense": 2500,
+        "savings": 3500
+    }
+];
 
-function drawChart() {
-    console.log("called inside index.js")
-    let data = google.visualization.arrayToDataTable([
-        ['Category', 'Budget'],
-        ['Budget', 5500],
-        ['Expense', 3000],
-        ['Savings', 2500],
-    ]);
+let userExpensePlans = [
+    {
+        "email": "abc@gmail.com",
+        "travel": 1000,
+        "entertainment": 500,
+        "food": 1500
+    },
+    {
+        "email": "def@gmail.com",
+        "travel": 1500,
+        "entertainment": 500,
+        "food": 500
+    }
+];
 
-    let options = {
-        title: 'Budget Summary',
-        pieHole: 0.4
-    };
+let jsonBudgetPlans = JSON.stringify(userBudgetPlans);
+localStorage.setItem("userBudgetPlans", jsonBudgetPlans);
 
-    let chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-    chart.draw(data, options);
-}*/
+let jsonExpensePlans = JSON.stringify(userExpensePlans);
+localStorage.setItem("userExpensePlans", jsonExpensePlans);
+
 
 function validateUser() {
     const activeUser = sessionStorage.getItem("activeUser");
