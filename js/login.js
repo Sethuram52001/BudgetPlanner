@@ -50,6 +50,7 @@ function login() {
     for (const user of userCredentials) {
         if (user.email === loginMail && user.password === loginPassword) {
             alert("Login successful!");
+            sessionStorage.setItem("activeUser", loginMail);
             return;
         }
     }

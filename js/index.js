@@ -17,3 +17,13 @@ function drawChart() {
     let chart = new google.visualization.PieChart(document.getElementById('donutchart'));
     chart.draw(data, options);
 }
+
+function validateUser() {
+    const activeUser = sessionStorage.getItem("activeUser");
+    const users = JSON.parse(localStorage.getItem("userCredentials"));
+    for (const user of users) {
+        if (user.email === activeUser) {
+            document.getElementById("welcome_user").innerHTML = `Welcome back ${user.name}! Here's your current status of budget plan`;
+        }
+    }
+}
