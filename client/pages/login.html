@@ -35,16 +35,76 @@
                 <input id="register-name" type="text" placeholder="Name">
                 <input id="register-mail" type="email" placeholder="name@email.com">
                 <input id="register-password" type="password" placeholder="Password">
-                <button name="register-button" type="button" id="register-button" onclick="register()">Register</button>
+                <button name="register-button" type="button" id="register-button">Register</button>
                 <p class="message">Already registered?<a href="#">Sign In</a></p>
             </form>
             <form class="login">
                 <input id="login-mail" type="text" placeholder="name@email.com">
                 <input id="login-password" type="password" placeholder="Password">
-                <button name="login-button" type="button" id="login-button" onclick="login()">Login</button>
+                <button name="login-button" type="button" id="login-button">Login</button>
                 <p class="message">Not registered? <a href="#">Create an account</a></p>
             </form>
         </div>
     </div>
+
+    <!--db-->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDxiTHLdf1Z69zBVYYgBCsbHYP2GDqwrFQ",
+        authDomain: "budgetplanner-15e94.firebaseapp.com",
+        projectId: "budgetplanner-15e94",
+        storageBucket: "budgetplanner-15e94.appspot.com",
+        messagingSenderId: "113474445071",
+        appId: "1:113474445071:web:4fd774c353311bb998e87a"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      import {getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+      const db = getDatabase();
+
+      function regUser() {
+            let registerName = document.getElementById("register-name").value;
+            let registerMail = document.getElementById("register-mail").value;
+            let registerPassword = document.getElementById("register-password").value;
+          set(ref(db, 'users/' + registerMail.substring(0, registerMail.indexOf(".com"))), {
+              name: registerName,
+              email: registerMail,
+              password: registerPassword
+          })
+          .then(() => {
+              alert("User added to db");
+          })
+          .catch((err) => {
+              alert('failed to add user');
+          });
+      }
+
+      function login() {
+        let loginMail = document.getElementById("login-mail").value;
+        let loginPassword = document.getElementById("login-password").value;
+          const dbref=ref(db);
+          get(child(dbref, "users/"+loginMail.substring(0, loginMail.indexOf(".com")))).then((snapshot) => {
+              if(snapshot.exists() && snapshot.val().email === loginMail && snapshot.val().password === loginPassword) {
+                alert("Login successful!");
+                sessionStorage.setItem("activeUser", loginMail);
+                return;
+              }
+              else {
+                  alert("Login failed! Invalid credentials");
+              }
+          })
+      }
+
+      document.getElementById("register-button").addEventListener("click", regUser);
+      document.getElementById("login-button").addEventListener("click", login);
+    </script>
 </body>
 </html>

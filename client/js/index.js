@@ -27,12 +27,12 @@ let userExpensePlans = [
         "food": 500
     }
 ];
-
+/*
 let jsonBudgetPlans = JSON.stringify(userBudgetPlans);
 localStorage.setItem("userBudgetPlans", jsonBudgetPlans);
 
 let jsonExpensePlans = JSON.stringify(userExpensePlans);
-localStorage.setItem("userExpensePlans", jsonExpensePlans);
+localStorage.setItem("userExpensePlans", jsonExpensePlans);*/
 
 
 function validateUser() {

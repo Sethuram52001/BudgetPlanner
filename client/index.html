@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./styles/index.css">
     <script src="./js/index.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
       let userBudgetPlan = null;
       let userExpensePlan = null;
       if(sessionStorage.getItem("activeUser") !== null) {
@@ -70,7 +70,7 @@
       }
     </script>
 </head>
-<body onload="validateUser()">
+<body>
     <nav>
         <ul>
             <li><a href="#" class="logo">Budget Planner</a></li>
@@ -122,5 +122,114 @@
         <p class="value">Savings /<sub>Budget</sub></p>
       </div>
     </div>
+
+    <!--db-->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDxiTHLdf1Z69zBVYYgBCsbHYP2GDqwrFQ",
+        authDomain: "budgetplanner-15e94.firebaseapp.com",
+        projectId: "budgetplanner-15e94",
+        storageBucket: "budgetplanner-15e94.appspot.com",
+        messagingSenderId: "113474445071",
+        appId: "1:113474445071:web:4fd774c353311bb998e87a"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      import {getDatabase, get, ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+      const db = getDatabase();
+
+      window.addEventListener('load', (event) => {
+        console.log('page is fully loaded');
+        validateUser();
+      });
+
+      function validateUser() {
+        const activeUser = sessionStorage.getItem("activeUser");
+        const dbref = ref(db);
+        get(child(dbref, "users/"+activeUser.substring(0, activeUser.indexOf(".com")))).then((snapshot) => {
+          if(snapshot.exists()) {
+            document.getElementById("welcome_user").innerHTML = `Welcome back ${snapshot.val().name}! Here's your current status of budget plan`;
+          }
+          else {
+            document.getElementById("welcome_user").innerHTML = 'Please Login to get custom details, down below are dummy data for ur ref';
+          }
+        });
+
+        get(child(dbref, "userBudgetPlans/"+activeUser.substring(0, activeUser.indexOf(".com")))).then((snapshot) => {
+          if(snapshot.exists()) {
+           let userBudgetPlans = [
+                {
+                    "email": snapshot.val().email,
+                    "budget": snapshot.val().budget,
+                    "expense": snapshot.val().expense,
+                    "savings": snapshot.val().savings 
+                }
+            ];
+            let jsonBudgetPlans = JSON.stringify(userBudgetPlans);
+            localStorage.setItem("userBudgetPlans", jsonBudgetPlans);
+          }
+          else {
+            let userBudgetPlans = [
+                {
+                    "email": "abc@gmail.com",
+                    "budget": 5500,
+                    "expense": 3000,
+                    "savings": 2500
+                },
+                {
+                    "email": "def@gmail.com",
+                    "budget": 6000,
+                    "expense": 2500,
+                    "savings": 3500
+                }
+            ];
+            
+          let jsonBudgetPlans = JSON.stringify(userBudgetPlans);
+          localStorage.setItem("userBudgetPlans", jsonBudgetPlans);
+          }
+        });
+
+        get(child(dbref, "userExpensePlans/"+activeUser.substring(0, activeUser.indexOf(".com")))).then((snapshot) => {
+          if(snapshot.exists()) {
+              let userExpensePlans = [
+                  {
+                      "email": snapshot.val().email,
+                      "travel": snapshot.val().travel,
+                      "entertainment": snapshot.val().entertainment,
+                      "food": snapshot.val().food
+                  }
+              ];
+              let jsonExpensePlans = JSON.stringify(userExpensePlans);
+              localStorage.setItem("userExpensePlans", jsonExpensePlans);
+          }
+          else {
+              let userExpensePlans = [
+                  {
+                      "email": "abc@gmail.com",
+                      "travel": 1000,
+                      "entertainment": 500,
+                      "food": 1500
+                  },
+                  {
+                      "email": "def@gmail.com",
+                      "travel": 1500,
+                      "entertainment": 500,
+                      "food": 500
+                  }
+              ];
+              let jsonExpensePlans = JSON.stringify(userExpensePlans);
+              localStorage.setItem("userExpensePlans", jsonExpensePlans);
+            }
+        });
+      }
+    </script>
 </body>
 </html>
