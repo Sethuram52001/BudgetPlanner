@@ -19,21 +19,69 @@
     </nav>
 
     <div class="container">
-        <form action="/" method="post">
+        <form>
             <div class="budget">
                 <label>Budget : </label>
-                <input type="number" name="budget" value="0">
+                <input id="budget_in" type="number" name="budget" value="0">
             </div>
             <div class="expense">
                 <label>Expense : </label>
-                <input type="number" name="expense" value="0">
+                <input id="expense_in" type="number" name="expense" value="0">
             </div>
             <div class="saving">
                 <label>Savings : </label>
-                <input type="number" name="savings" value="0">
+                <input id="savings_in" type="number" name="savings" value="0">
             </div>
-            <input type="submit" value="Set Budget Plan">
+            <input id="setBudgetPlan" type="submit" value="Set Budget Plan">
         </form>
     </div>
+
+    <!--db-->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDxiTHLdf1Z69zBVYYgBCsbHYP2GDqwrFQ",
+        authDomain: "budgetplanner-15e94.firebaseapp.com",
+        projectId: "budgetplanner-15e94",
+        storageBucket: "budgetplanner-15e94.appspot.com",
+        messagingSenderId: "113474445071",
+        appId: "1:113474445071:web:4fd774c353311bb998e87a"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      import {getDatabase, get, ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+      const db = getDatabase();
+
+      function setBudgetPlan(e) {
+          e.preventDefault();
+          let budget = +document.getElementById("budget_in").value;
+          let expense = +document.getElementById("expense_in").value;
+          let savings = +document.getElementById("savings_in").value;
+          let id = sessionStorage.getItem("activeUser");
+          console.log(typeof(budget));
+
+          set(ref(db, `userBudgetPlans/${id.substring(0, id.indexOf(".com"))}`), {
+              budget: budget,
+              expense: expense,
+              email: id,
+              savings: savings
+          })
+           .then(() => {
+              alert("added budget plan to db");
+          })
+          .catch((err) => {
+              alert('failed to set budget plan');
+          });
+      }
+
+      document.getElementById("setBudgetPlan").addEventListener("click", setBudgetPlan);
+    </script>
 </body>
 </html>

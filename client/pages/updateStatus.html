@@ -19,21 +19,68 @@
     </nav>
 
     <div class="container">
-        <form action="/" method="post">
+        <form>
             <div class="budget">
-                <label>Update Budget : </label>
-                <input type="number" name="updatebudget" value="0">
+                <label>Entertainment : </label>
+                <input id="entertainment_in" type="number" name="updateentertainment" value="0">
             </div>
             <div class="expense">
-                <label>Update Expense : </label>
-                <input type="number" name="updateexpense" value="0">
+                <label>Food : </label>
+                <input id="foodExpense_in" type="number" name="updatefood" value="0">
             </div>
             <div class="saving">
-                <label>Update Savings : </label>
-                <input type="number" name="updatesavings" value="0">
+                <label>Travel : </label>
+                <input id="travelExpense_in" type="number" name="updatetravel" value="0">
             </div>
-            <input type="submit" value="Update Budget Plan">
+            <input id="setExpensePlan" type="submit" value="Update Expense Plan">
         </form>
     </div>
+
+    <!--db-->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDxiTHLdf1Z69zBVYYgBCsbHYP2GDqwrFQ",
+        authDomain: "budgetplanner-15e94.firebaseapp.com",
+        projectId: "budgetplanner-15e94",
+        storageBucket: "budgetplanner-15e94.appspot.com",
+        messagingSenderId: "113474445071",
+        appId: "1:113474445071:web:4fd774c353311bb998e87a"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+
+      import {getDatabase, get, ref, set, child, update, remove} from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+      const db = getDatabase();
+
+      function setExpensePlan(e) {
+          e.preventDefault();
+          let entertainmentExpense = +document.getElementById("entertainment_in").value;
+          let foodExpense = +document.getElementById("foodExpense_in").value;
+          let travelExpense = +document.getElementById("travelExpense_in").value;
+          let id = sessionStorage.getItem("activeUser");
+
+          set(ref(db, `userExpensePlans/${id.substring(0, id.indexOf(".com"))}`), {
+              email: id,
+              entertainment: entertainmentExpense,
+              food: foodExpense,
+              travel: travelExpense
+          })
+           .then(() => {
+              alert("updated expense plan");
+          })
+          .catch((err) => {
+              alert('failed to set expense plan');
+          });
+      }
+
+      document.getElementById("setExpensePlan").addEventListener("click", setExpensePlan);
+    </script>
 </body>
 </html>
